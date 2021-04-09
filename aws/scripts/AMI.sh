@@ -1,5 +1,6 @@
 # A variety of helpful AMI commands collected from different AWS doc pages
 # Doc: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
+# Blog: https://aws.amazon.com/blogs/compute/query-for-the-latest-amazon-linux-ami-ids-using-aws-systems-manager-parameter-store/
 
 # 1. View a list of all Linux AMIs in the current AWS Region by using the following command in the AWS CLI
 aws ssm get-parameters-by-path --path /aws/service/ami-amazon-linux-latest --query "Parameters[].Name"
@@ -28,9 +29,12 @@ aws ec2 describe-images \
   --query "reverse(sort_by(Images, &CreationDate))[:1].ImageId" \
   --output json
 
-#5. The URL below launches an instance from the ami-0abcdef1234567890 AMI in the us-east-1 Region
+#5. The URLs below are bookmark URLs to perform an action by copy/pasting the URL on the browser directly
 # Doc: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-bookmarks.html
+# a. Launch an instance from the ami-0abcdef1234567890 AMI in the us-east-1 Region
 https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#LaunchInstanceWizard:ami=ami-0abcdef1234567890
+# b. Find a shared public AMI using the console
+https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Images:visibility=public-images;ownerAlias=amazon;sort=name
 
 #6. List AMIs owned by Amazon. 
 # Note: The following command create over half a million lines json output, see file /tmp/out.
